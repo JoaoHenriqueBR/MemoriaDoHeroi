@@ -16,3 +16,10 @@ for (let i = 4; i <= 10; i += 2){ // De 4 até 10
     // Adiciona a nova opção para a página
     select.appendChild(op);
 }
+
+start.addEventListener('click', ()=>{
+    menu.classList.add('hidden');
+    board.node.classList.remove('hidden');
+});
+
+start.click();
