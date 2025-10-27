@@ -26,11 +26,44 @@ class BoardManager {
             numberCards = 2*this.numImgs;
         }
 
+        numberCards=parseInt(numberCards);
+        this.curNumCards = numberCards;
+
         this.clear();
-        this.addCard(this.cardManager.gen(1));
+        this.genRamdonList(numberCards).forEach((number)=>{
+            this.addCard(this.cardManager.gen(number));
+        })
+
+        this.adjustCss();
+    }
+
+    // Ajusta o CSS para encaixar todas as cartas no tabuleiro
+    adjustCss(){
+        // Calcular o numero de colunas
+        let cols = Math.sqrt(this.curNumCards);
+
+        // Calcular o tamanho da carta
+        let size = (100/cols - 1);
+
+        // Transformar o size para o CSS usando uma string
+        size += 'vmin';
+
+        // Definir as propriedades do CSS
+        document.documentElement.style.setProperty("--numCols", cols);
+        document.documentElement.style.setProperty("--size", size);
     }
 
     addCard(card){
         this.node.appendChild(card);
+    }
+
+    // Gerar lista aleatória
+    genRamdonList(size){
+        // Cria uma lista com os numeros 1 para o tamanho final
+        let list = Array(size/2).fill().map((_,i)=>i+1);
+        console.log({list});
+        // Dobro a lista e randomiza ela
+        list = [...list, ...list].sort(()=>Math.random()-0.5);
+        return list;
     }
 }

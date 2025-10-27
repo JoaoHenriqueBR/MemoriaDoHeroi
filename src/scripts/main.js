@@ -1,3 +1,19 @@
+
+
+// Factory
+function urlBuilder(number){
+    // Trasnforma o numero em uma string (palavra)
+    number+="";
+    // Add 0 para a esquerda dos numeros peques
+    number = number.padStart(2,'0');
+
+    return `images/heros/card${number}.jpeg`;
+}
+
+// Instâncias dos objetos criados
+let card = new CardManager(urlBuilder);
+let board = new BoardManager("board", 50, card);
+
 // Dom elements
 let menu = document.getElementById('menu');
 let select = document.getElementById('numCards');
@@ -20,6 +36,7 @@ for (let i = 4; i <= 10; i += 2){ // De 4 até 10
 start.addEventListener('click', ()=>{
     menu.classList.add('hidden');
     board.node.classList.remove('hidden');
+    board.fill(select.value);
 });
 
 start.click();
