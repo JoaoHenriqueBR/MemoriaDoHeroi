@@ -36,6 +36,7 @@ class CardManager{
     }
     flip(cardNode){
         cardNode.children[0].classList.add('selected');
+        this.flippedCards.add(cardNode);
     }
     unFlip(cardNode){
         cardNode.children[0].classList.remove('selected');
